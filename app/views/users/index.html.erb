@@ -1,2 +1,25 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<h1>List of Users</h1>
+
+<table class='table table-striped'>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Twitter</th>
+    <th>Role</th>
+    <th>Options</th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= link_to user.name, user %> <span class="top_commenter"><%= if @avids.include?(user.id) then "top commenter" end %></span></td>
+    <td><%= user.email %></td>
+    <td><%= user.twitter %></td>
+    <td><%= user.role %></td>
+    <td><%= link_to 'Edit', edit_user_registration_path(user) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<p><%= link_to 'Sign me up', new_user_registration_path, { :class => "btn btn-success" } %></p>

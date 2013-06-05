@@ -7,6 +7,6 @@ class HomeController < ApplicationController
   end
   
   def redirect_to_posts
-	redirect_to posts_path if session[:current_user_id]
+	# redirect_to posts_path if user_signed_in?
   end
 end

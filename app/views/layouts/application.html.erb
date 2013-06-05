@@ -7,8 +7,70 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+ <div class="row">
+  <div class="navbar navbar-inverse navbar-static-top">
+	<div class="navbar-inner">
+	  <ul class="nav" style="margin-left: 100px;">
+		<li><%= link_to 'Home', root_url %></li>
+		<li><%= link_to 'All Posts', posts_path %></li>
+		<li><%= link_to 'New Post', new_post_path %></li>
+		<li><%= link_to 'Users', users_path %></li>
+		<li>
+	  </ul>
+	  <ul class="nav pull-right" style="margin-right: 50px;">
+		<li>
+		  <% if user_signed_in? %>
+			<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+		  <% else %>
+			<%= link_to "sign in", new_user_session_path %>
+		  <% end %>
+		</li>
+	  </ul>
+	</div>
+		<div class="pull-right" style="font-size: 80%; margin-right: 69px;">
+		  <% if user_signed_in? %>
+			Signed in as <%= current_user.email %>. Not you?
+		  <% end %>
+		</div>
+  </div>
+ </div>
+ <div class="container">
+	<div class="row">
+	  <div class="container">
+ 	   <div class="span12">
+		  <div class="well">
+		   <div class="media">
+			<a class="pull-left" href="#">
+			  <img src="/assets/firefly90x90.png">
+			</a>		   
+		    <div class="media-body">
+				<h2>Firefly Fan Forum</h2>
+				<p>All the news that is fit to print about the best sci-fi series on TV (other than Battlestar Galactica)</p>
+		    </div>
+		   </div>
+		  </div>
+	   </div>
+	  </div>  
+	</div>
 
-<%= yield %>
+	<div class="row">
+	  <div class="span3">
+		<div class="nav nav-tabs nav-stacked">
+		  <li><a href="#">Firefly, the show</a></li>
+		  <li><a href="#">Serenity, the movie</a></li>
+		  <li><a href="#">Firefly cast</a></li>
+		  <li><a href="#">Firefly lore</a></li>
+		  <li><a href="#">NASA</a></li>
+		</div>
+	  </div>
+	  <div class="span9">
+		<%= yield %>
+	  	 </div>
+	</div>
+ </div>
+ <div class='container'>
+	<p style='margin-top: 40px; text-align: center;'>&copy; Kevin Browne, 2013. All rights reserved.</p>
+ </div>
 
 </body>
 </html>

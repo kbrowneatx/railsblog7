@@ -1,2 +1,12 @@
-<h1>Comments#index</h1>
-<p>Find me in app/views/comments/index.html.erb</p>
+<h1>Comments by <%= @user.name %>:</h1>
+
+
+<% @comments.each do |comment| %>
+ <div class='well'>
+    <p><%= comment.content %></p>
+	<p class="pull-right">in response to '<%= comment.post.title %>'</p>
+ </div>
+<% end %>
+</table>
+
+<br />

@@ -1,2 +1,40 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<h1><%= @post.title %></h1>
+<p><i>by <%= @post.user.name %></i><p>
+
+<p><%= @post.content %></p>
+
+<p>Last updated: <%= @post.updated_at %>
+
+<hr />
+<h2>Comments</h2>
+
+<h5><%= @user.name %>, comment on this post</h5>
+<%= form_for @post do |post_form| %>
+  <%= post_form.fields_for :comments, @newcomment do |nc| %>
+	<p>
+	  <%= nc.text_area :content, :size => "160x6" %>
+	</p>
+
+  <% end %>
+	<p>
+	  <%= post_form.submit "Create", { :class => "btn btn-inverse" } %>
+	</p>
+<% end %>
+
+<hr />
+<table class='table table-striped'>
+	<% @comments.each do |comment| %>
+		<tr>
+		  <% if comment.user_id.nil? %>
+		    <td>name withheld</td>
+		  <% else %>
+		    <td><%= link_to comment.user.name, user_comments_path(comment.user) %></td>
+		  <% end %>
+		    <td><%= comment.content %> (posted at <%= comment.created_at %>)</td>
+		</tr>
+	<% end %>
+</table>
+<hr />
+<p><%= link_to 'Edit this post', edit_post_path, { :class => "btn btn-warning" } %></p>
+<p></p>
+<p><%= link_to "<- Back to All Posts", posts_path, { :class => "btn btn-primary" } %></p>

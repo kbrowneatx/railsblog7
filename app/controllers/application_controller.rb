@@ -4,10 +4,10 @@ class ApplicationController < ActionController::Base
   private
   
   def set_current_user
-	if session[:current_user_id]
-		@user = User.find(session[:current_user_id])
+	if user_signed_in?
+		@user = current_user
 	else
-		redirect_to root_url
+		redirect_to new_user_session_path
 	end
   end
   

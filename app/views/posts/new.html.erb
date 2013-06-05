@@ -1,2 +1,8 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<h1>Create a new Post</h1>
+
+
+<div class='form-horizontal'>
+  <%= render :partial => 'post', :locals => { :post => @post } %>
+</div>
+
+<p></p>

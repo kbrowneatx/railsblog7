@@ -1,2 +1,29 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1>User Info <%= link_to 'Edit', edit_user_registration_path(@user), { :class => "btn btn-warning" } %></h1>
+<p>&nbsp;</p>
+<table class='table table-bordered table-condensed'>
+  <tr>
+	<td>Name</td><td><%= @user.name %></td>
+  </tr>
+  <tr>
+	<td>Email</td><td><%= @user.email %></td>
+  </tr>
+  <tr>
+	<td>Twitter</td><td><%= @user.twitter %></td>
+  </tr>
+  <tr>
+	<td>Bio</td><td><%= @user.bio %></td>
+  </tr>
+  <tr>
+	<td>Role</td><td><%= @user.role %></td>
+  </tr>
+</table>	
+<br />
+<p><%= link_to "<- Back to All Users", users_path, { :class => "btn btn-primary" } %></p>
+<p></p>
+
+<hr />
+<h4>Posts by <%= @user.name %></h4>
+
+<% @user.posts.each do |post| %>
+    <p><%= link_to post.title, post_path(post) %></p>
+<% end %>

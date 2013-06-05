@@ -1,2 +1,17 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<h1>All Posts</h1>
+<p>You are logged in as <%= @user.name %></p>
+
+<% @posts.each do |post| %>
+    <div class="well">
+		<h3><%= link_to post.title, post %></h3>
+		<p><%= post.content[0..100] %>... (more) </p>
+		<p><span style="font: italic 10px serif;">Last updated: <%= post.updated_at %></span> &emsp; | &emsp; <span style="color: #cc0000;"><%= post.comments.count %> comments</span></p>
+		<p><%= link_to 'Edit', edit_post_path(post), { :class => "btn btn-warning" } %> 
+		  <%= link_to 'Delete', post, class: 'btn btn-danger', method: :delete, confirm: 'Are you sure?' %></p>
+	</div>
+<% end %>
+<%= link_to 'Older Posts', posts_path(page: 1), { :class => "btn btn-large btn-block" } %>
+
+
+<hr />
+<%= link_to 'New Post', new_post_path, { :class => "btn btn-success" } %>
