@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   
   def index
 	@users = User.all
-	@user = User.new
+	@post = Post.last
   end
   
   def redirect_to_posts

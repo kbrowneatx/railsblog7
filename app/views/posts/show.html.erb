@@ -3,21 +3,20 @@
 
 <p><%= @post.content %></p>
 
-<p>Last updated: <%= @post.updated_at %>
+<p>Last updated: <%= @post.updated_at.strftime("%m/%d/%Y") %></p>
 
 <hr />
 <h2>Comments</h2>
 
 <h5><%= @user.name %>, comment on this post</h5>
-<%= form_for @post do |post_form| %>
-  <%= post_form.fields_for :comments, @newcomment do |nc| %>
+<%= simple_form_for @post do |f| %>
+  <%= f.simple_fields_for :comments, @newcomment do |nc| %>
 	<p>
-	  <%= nc.text_area :content, :size => "160x6" %>
+	  <%= nc.input :content, :as => :text, :input_html => { :class => "span6", :rows => 12} %>
 	</p>
-
   <% end %>
 	<p>
-	  <%= post_form.submit "Create", { :class => "btn btn-inverse" } %>
+	  <%= f.submit "Create", { :class => "btn btn-success" } %>
 	</p>
 <% end %>
 
@@ -30,7 +29,7 @@
 		  <% else %>
 		    <td><%= link_to comment.user.name, user_comments_path(comment.user) %></td>
 		  <% end %>
-		    <td><%= comment.content %> (posted at <%= comment.created_at %>)</td>
+		    <td><%= comment.content %> (posted at <%= comment.created_at.strftime("%m/%d/%Y") %>)</td>
 		</tr>
 	<% end %>
 </table>
