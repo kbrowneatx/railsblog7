@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  load_and_authorize_resource
   before_filter :find_post, except: [:index, :new, :create]
   before_filter :set_current_user
   

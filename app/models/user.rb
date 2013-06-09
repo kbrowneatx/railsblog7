@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true, length: { maximum: 40 }
   validates :email, presence: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
-  validates :role, :inclusion => { :in => %w(author reader), :message => "must be author (requires admin approval) or reader" }
+  validates :role, :inclusion => { :in => %w(admin author reader), :message => "must be admin, author (requires admin approval) or reader" }
   
   scope :in_AtoZ, order('name ASC')
   scope :avidreader, select('users.id, count(comments.id) AS comment_count').
