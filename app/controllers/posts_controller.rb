@@ -5,11 +5,20 @@ class PostsController < ApplicationController
   
   def index
 	if params[:page]
-		pg = params[:page].to_i
+		@pagenum = params[:page].to_i
 	else
-		pg = 0
+		@pagenum = 0
 	end
-	@posts = Post.recent.offset(pg * 3)
+	i = 3
+	@pagecount = Post.count / i
+	@posts = Post.recent.offset(@pagenum * i)
+	if @pagenum < @pagecount
+		@pagenum += 1
+		@btnlabel = "Older Posts"
+	else
+		@pagenum = 0
+		@btnlabel = "Back to top"
+	end
   end
 
   def show

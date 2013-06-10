@@ -16,7 +16,7 @@
 		</p>
 	</div>
 <% end %>
-<%= link_to 'Older Posts', posts_path(page: 1), { :class => "btn btn-large btn-block" } %>
+<%= link_to @btnlabel, posts_path(page: @pagenum), { :class => "btn btn-large btn-block" } %>
 
 
 <hr />
