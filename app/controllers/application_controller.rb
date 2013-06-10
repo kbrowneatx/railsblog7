@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  check_authorization
+  check_authorization :unless => :devise_controller?
   
   private
   
@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
 		redirect_to new_user_session_path
 	end
   end
-
+  
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
+    redirect_to posts_path, :alert => exception.message
   end
 end

@@ -6,13 +6,15 @@ class Ability
     #
     user ||= User.new # guest user (not logged in)
     if user.role == 'admin'
-      can :manage, :all
+      can :manage, [User, Post, Comment]
     elsif user.role == 'author'
-	  can [:read, :create], [Post, Comment]
-	  can [:update, :destroy], Post, :active => true, :user_id => user.id
+	  can [:read, :create, :update], [User, Post, Comment]
+	  can [:destroy], Post
+	  # can :manage, Session
 	else
-	  can :create, Comment
       can :read, [Post, Comment]
+	  can :create, Comment
+	  # can :manage, Session
     end
     #
     # The first argument to `can` is the action you are giving the user 

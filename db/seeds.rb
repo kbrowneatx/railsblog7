@@ -2,8 +2,8 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
 
-u1 = User.create!(name:'MalJr', email:'maljr@fireflyforum.net', password: 'password', password_confirmation: 'password', bio:'Watched all episodes 10x', role:'author', twitter:'Fake_Malcolm', postanonymous: false)
-u2 = User.create!(name:'NotWash', email:'notwash@fireflyforum.net', password: 'password', password_confirmation: 'password', bio:'Watched all episodes 10x more than FakeMal', role:'author', twitter:'Fake_AlanTudyk', postanonymous: false)
+u1 = User.create!(name:'MalJr', email:'maljr@fireflyforum.net', password: 'password', password_confirmation: 'password', bio:'Watched all episodes 10x', role:'admin', twitter:'Fake_Malcolm', postanonymous: false)
+u2 = User.create!(name:'NotWash', email:'notwash@fireflyforum.net', password: 'password', password_confirmation: 'password', bio:'Watched all episodes 10x more than FakeMal', role:'admin', twitter:'Fake_AlanTudyk', postanonymous: false)
 u3 = User.create!(name:'troll247', email:'troll247@aol.com', password: 'password', password_confirmation: 'password', bio:'UNDERSTOOD all episodes', role:'reader', postanonymous: false)
 u4 = User.create!(name:'SilentSteve', email:'steve@bloc.io', password: 'password', password_confirmation: 'password', role:'reader', postanonymous: true)
 u5 = User.create!(name:'InaraSera', email:'inara@fireflyforum.net', password: 'password', password_confirmation: 'password', bio:'Prettiest of the bunch', role:'author', twitter:'FakeCompanion', postanonymous: false)
