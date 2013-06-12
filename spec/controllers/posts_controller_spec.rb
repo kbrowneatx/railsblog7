@@ -1,18 +1,23 @@
 require 'spec_helper'
 
 describe PostsController do
-	describe new do
-		it "requires a name and content" do
-			p = Post.new
-			p.title = "This is Title text."
-			p.content = "This is the content text."
-			p.user_id = 1
-			p.should be_an_instance_of Post
-		end
-		
-		it "requires a user_id" do
-			
-		end
-	end
-	
+  describe "GET #index" do
+    it "responds successfully with an HTTP 200 status code" do
+      get :index
+      expect(response).to be_success
+      expect(response.status).to eq(200)
+    end
+
+    it "renders the index template" do
+      get :index
+      expect(response).to render_template("index")
+    end
+
+    it "loads all of the posts into @posts" do
+      post1, post2 = Post.create!, Post.create!
+      get :index
+
+      expect(assigns(:posts)).to match_array([post1, post2])
+    end
+  end
 end
