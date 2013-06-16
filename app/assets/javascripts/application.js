@@ -13,3 +13,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(function() {
+$('#toggleButton').click( function() {
+  $('#bodycontent').slideToggle('2000', function(){
+ if ($('#bodycontent').is(':visible')) {
+  $('#toggleButton').val('Hide') 
+ } else {
+  $('#toggleButton').val('Show') 
+   }
+    });
+  });
+});

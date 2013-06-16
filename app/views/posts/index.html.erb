@@ -1,5 +1,11 @@
-<h1>All Posts</h1>
-<p>You are logged in as <%= @user.name %></p>
+<div class="navbar navbar-inverse">
+  <div class="navbar-inner">
+    <a class="brand">All Posts</a>
+		<% form_tag posts_path, :class => "navbar-search pull-right", :method => 'get', :remote => true do %>
+			<%= text_field_tag :search, params[:search], :class => "search-query" %>
+		<% end %>
+	</div>
+</div>
 
 <% @posts.each do |post| %>
     <div class="well">
@@ -8,10 +14,10 @@
 		<p><span style="font: italic 10px serif;">Last updated: <%= post.updated_at %></span> &emsp; | &emsp; <span style="color: #cc0000;"><%= post.comments.count %> comments</span></p>
 		<p>
 		  <% if can? :update, Post %>
-			<%= link_to 'Edit', edit_post_path(post), { :class => "btn btn-warning" } %>
+			<%= link_to 'Edit', edit_post_path(post), { :class => "btn btn-mini btn-warning" } %>
 		  <% end %>
 		  <% if can? :destroy, Post %>
-		    <%= link_to 'Delete', post, class: 'btn btn-danger', method: :delete, confirm: 'Are you sure?' %>
+		    <%= link_to 'Delete', post, class: 'btn btn-mini btn-danger', method: :delete, confirm: 'Are you sure?' %>
 		  <% end %>
 		</p>
 	</div>
