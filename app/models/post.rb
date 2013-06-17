@@ -8,4 +8,12 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments, :dependent => :destroy
   accepts_nested_attributes_for :comments
+	
+	def self.search(search)
+		if search
+			where('title LIKE ?', "%#{search}%")
+		else
+			scoped
+		end
+	end
 end
