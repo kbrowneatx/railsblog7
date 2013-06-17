@@ -4,21 +4,7 @@ class PostsController < ApplicationController
   before_filter :set_current_user
   
   def index
-		if params[:page]
-			@pagenum = params[:page].to_i
-		else
-			@pagenum = 0
-		end
-		i = 3
-		@pagecount = Post.count / i
-		@posts = Post.recent.offset(@pagenum * i)
-		if @pagenum < @pagecount
-			@pagenum += 1
-			@btnlabel = "Older Posts"
-		else
-			@pagenum = 0
-			@btnlabel = "Back to top"
-		end
+		@posts = Post.search(params[:search]).paginate(:page => params[:page], :per_page => 3)
   end
 
   def show

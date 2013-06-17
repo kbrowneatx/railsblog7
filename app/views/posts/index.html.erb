@@ -25,8 +25,7 @@
 		</p>
 	</div>
 <% end %>
-<%= link_to @btnlabel, posts_path(page: @pagenum), { :class => "btn btn-large btn-block" } %>
-
+<%= will_paginate @posts %>
 
 <hr />
 <% if can? :create, @post %>
