@@ -1,0 +1,14 @@
+	<table class='table table-striped'>
+		<% @comments.each do |comment| %>
+			<tr>
+				<% if comment.user_id.nil? %>
+					<td>name withheld</td>
+				<% elsif comment.user.postanonymous == true %>
+					<td>Anonymous</td>
+				<% else %>
+					<td><%= link_to comment.user.name, user_comments_path(comment.user) %></td>
+				<% end %>
+					<td><%= comment.content %> (posted at <%= comment.created_at.strftime("%m/%d/%Y") %>)</td>
+			</tr>
+		<% end %>
+	</table>

@@ -24,14 +24,12 @@ $(document).ready(function() {
 		}
 		});
   });
-	$("#postlist .pagination a").live("click", function(){
-		$.getScript(this.href);
-		return false;
-	});
+
 	$("#userlist th a").live("click", function(){
 		$.getScript(this.href);
 		return false;
 	});
+	
 	$("#posts_search").submit(function() {
 		$.get(this.action, $(this).serialize(), null, "script");
 		return false;

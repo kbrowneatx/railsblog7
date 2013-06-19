@@ -1,1 +1,2 @@
-$("#postlist").html("<%= escape_javascript(render("postlist")) %>");
+$("#postlist").html("<%= escape_javascript(render('posts')) %>");
+$.setAjaxPagination();

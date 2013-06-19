@@ -35,7 +35,7 @@ class PostsController < ApplicationController
   def update
     # if comment
     if params[:post].has_key?(:comments_attributes)
-	  params[:post][:comments_attributes]['0'][:user_id] = @user.id
+			params[:post][:comments_attributes]['0'][:user_id] = @user.id
     end
 
 		if @post.update_attributes(params[:post])
