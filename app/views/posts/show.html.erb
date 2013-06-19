@@ -15,7 +15,7 @@
 	<%= simple_form_for @post do |f| %>
 		<%= f.simple_fields_for :comments, @newcomment do |nc| %>
 		<p>
-			<%= nc.input :content, :as => :text, :label => false, :remote => true, :input_html => { :class => "span6", :rows => 6} %>
+			<%= nc.input :content, :as => :text, :label => false, :input_html => { :class => "span6", :rows => 6} %>
 		</p>
 		<% end %>
 		<p>

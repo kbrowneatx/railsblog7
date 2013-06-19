@@ -2,12 +2,10 @@ class PostsController < ApplicationController
   load_and_authorize_resource
   before_filter :find_post, except: [:index, :new, :create]
   before_filter :set_current_user
+	respond_to :html
   
   def index
 		@posts = Post.search(params[:search]).paginate(:page => params[:page], :per_page => 3)
-		# respond_to do |format|
-			# format.js {}
-		# end
   end
 
   def show
@@ -33,15 +31,26 @@ class PostsController < ApplicationController
   end
 
   def update
-    # if comment
-    if params[:post].has_key?(:comments_attributes)
+		# if comment
+		if params[:post].has_key?(:comments_attributes)
 			params[:post][:comments_attributes]['0'][:user_id] = @user.id
-    end
+			comments_flag = true
+		end
 
-		if @post.update_attributes(params[:post])
-			redirect_to @post
-		else
-			render :edit
+		if !comments_flag #if not set, we're editing the post
+			if @post.update_attributes(params[:post])
+				redirect_to @post #render full show template
+			else
+				render :edit
+			end
+		elsif comments_flag #if set, we're only adding a comment (nested attribute)
+			if @post.update_attributes(params[:post])
+				@comments = @post.comments.order('created_at DESC')
+				render :partial => "comments" #render only comments partial
+			else
+				flash[:error] = "Error submitting comment. Try again or contact sysadmin"
+				redirect_to @post
+			end
 		end
   end
 
