@@ -1,31 +1,16 @@
 <div>
-<h3>Posts
-	<%= simple_form_for posts_path, :html => { :class => 'pull-right' }, :method => :get do |f| %>
-
-			<%= f.input :search, :html => { :class => :append }, :label => false do %>
-				<%= f.input_field :search, input_html: { value: params[:search] } %>
+	<h3>Posts
+		<div class='pull-right'> 
+			<%= form_tag posts_path, :method => :get, :remote => true, :id => "posts_search" do %>
+				<%= text_field_tag :search, params[:search], :label => false%>
 				<span class="add-on"><i class="icon-search icon-white"></i></span>
 			<% end %>
-	<% end %>
-</h3>
+		</div>
+	</h3>
 </div>
 
-<% @posts.each do |post| %>
-    <div class="well">
-		<h3><%= link_to post.title, post %></h3>
-		<p><%= post.content[0..100] %>... (more) </p>
-		<p><span style="font: italic 10px serif;">Last updated: <%= post.updated_at %></span> &emsp; | &emsp; <span style="color: #cc0000;"><%= post.comments.count %> comments</span></p>
-		<p>
-		  <% if can? :update, Post %>
-			<%= link_to 'Edit', edit_post_path(post), { :class => "btn btn-mini btn-warning" } %>
-		  <% end %>
-		  <% if can? :destroy, Post %>
-		    <%= link_to 'Delete', post, class: 'btn btn-mini btn-danger', method: :delete, confirm: 'Are you sure?' %>
-		  <% end %>
-		</p>
-	</div>
-<% end %>
-<%= will_paginate @posts %>
+<div id="postlist"><%= render 'postlist' %></div>
+
 
 <hr />
 <% if can? :create, @post %>

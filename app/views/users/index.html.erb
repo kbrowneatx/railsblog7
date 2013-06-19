@@ -1,24 +1,3 @@
 <h1>List of Users</h1>
 
-<table class='table table-striped'>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Twitter</th>
-    <th>Role</th>
-    <th>Bio</th>
-  </tr>
-
-<% @users.each do |user| %>
-  <tr>
-    <td><%= if @avids.include?(user.id) then "*" end %> <%= link_to user.name, user %></td>
-    <td><%= user.email %></td>
-    <td><%= user.twitter %></td>
-    <td><%= user.role %></td>
-    <td><%= user.bio %></td>
-  </tr>
-<% end %>
-</table>
-<p><i>* - indicates top commenter</i></p>
-
-<br />
+<div id="userlist"><%= render 'user' %></div>

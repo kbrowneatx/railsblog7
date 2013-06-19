@@ -1,0 +1,16 @@
+<% @posts.each do |post| %>
+    <div class="well">
+		<h3><%= link_to post.title, post %></h3>
+		<p><%= post.content[0..100] %>... (more) </p>
+		<p><span style="font: italic 10px serif;">Last updated: <%= post.updated_at %></span> &emsp; | &emsp; <span style="color: #cc0000;"><%= post.comments.count %> comments</span></p>
+		<p>
+		  <% if can? :update, Post %>
+			<%= link_to 'Edit', edit_post_path(post), { :class => "btn btn-mini btn-warning" } %>
+		  <% end %>
+		  <% if can? :destroy, Post %>
+		    <%= link_to 'Delete', post, class: 'btn btn-mini btn-danger', method: :delete, :remote => true, confirm: 'Are you sure?' %>
+		  <% end %>
+		</p>
+	</div>
+<% end %>
+<%= will_paginate @posts, :remote => true %>

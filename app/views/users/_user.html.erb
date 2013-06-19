@@ -1,0 +1,19 @@
+	<table class='table table-striped'>
+		<tr>
+			<th><%= sortable "name" %></th>
+			<th><%= sortable "email" %></th>
+			<th><%= sortable "twitter" %></th>
+			<th><%= sortable "role" %></th>
+			<th>Bio</th>
+		</tr>
+	<% @users.each do |user| %>
+		<tr>
+			<td><%= if @avids.include?(user.id) then "*" end %> <%= link_to user.name, user %></td>
+			<td><%= user.email %></td>
+			<td><%= user.twitter %></td>
+			<td><%= user.role %></td>
+			<td><%= user.bio %></td>
+		</tr>
+	<% end %>
+	</table>
+	<p><i>* - indicates top commenter</i></p>

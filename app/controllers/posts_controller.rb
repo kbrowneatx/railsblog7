@@ -5,6 +5,9 @@ class PostsController < ApplicationController
   
   def index
 		@posts = Post.search(params[:search]).paginate(:page => params[:page], :per_page => 3)
+		# respond_to do |format|
+			# format.js {}
+		# end
   end
 
   def show
@@ -44,7 +47,10 @@ class PostsController < ApplicationController
 
   def destroy
 		if @post.destroy
-			redirect_to posts_path
+#			redirect_to posts_path <- this was the old non-AJAX command
+			respond_to do |format|
+				format.js {}
+			end
 		else
 			flash[:error] = "Error deleting post. Try again or contact sysadmin"
 			redirect_to @post

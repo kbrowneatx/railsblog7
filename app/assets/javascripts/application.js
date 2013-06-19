@@ -14,14 +14,26 @@
 //= require jquery_ujs
 //= require_tree .
 
-$(function() {
-$('#toggleButton').click( function() {
-  $('#bodycontent').slideToggle('2000', function(){
- if ($('#bodycontent').is(':visible')) {
-  $('#toggleButton').val('Hide') 
- } else {
-  $('#toggleButton').val('Show') 
-   }
-    });
+$(document).ready(function() {
+	$('#toggleButton').click( function() {
+		$('#bodycontent').slideToggle('2000', function(){
+		if ($('#bodycontent').is(':visible')) {
+			$('#toggleButton').val('Hide') 
+		} else {
+			$('#toggleButton').val('Show') 
+		}
+		});
   });
+	$("#postlist .pagination a").live("click", function(){
+		$.getScript(this.href);
+		return false;
+	});
+	$("#userlist th a").live("click", function(){
+		$.getScript(this.href);
+		return false;
+	});
+	$("#posts_search").submit(function() {
+		$.get(this.action, $(this).serialize(), null, "script");
+		return false;
+	});
 });

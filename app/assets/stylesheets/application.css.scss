@@ -45,3 +45,17 @@
  padding: 2%;
  width: 100%;
 }
+
+.table-striped th .current {
+  padding-right: 19px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.table-striped th .asc {
+  background-image: url(glyphicons-sortup-white.gif);
+}
+
+.table-striped th .desc {
+	background-image: url(glyphicons-sortdn-white.gif);
+}

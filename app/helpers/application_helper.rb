@@ -23,4 +23,11 @@ module ApplicationHelper
   def page_navigation_links(pages)
     will_paginate(pages, :class => 'pagination', :inner_window => 2, :outer_window => 0, :renderer => BootstrapLinkRenderer, :previous_label => '&larr;'.html_safe, :next_label => '&rarr;'.html_safe)
   end
+	
+	def sortable(column, title = nil)
+		title ||= column.titleize
+		css_class = column == sort_column ? "current #{sort_direction}" : nil
+		direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+		link_to title, params.merge(:sort => column, :direction => direction, :remote => true), {:class => css_class}
+	end
 end
