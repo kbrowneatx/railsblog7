@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   load_and_authorize_resource
   before_filter :find_post, except: [:index, :new, :create]
   before_filter :set_current_user
-	respond_to :html
+	respond_to :html, :js
   
   def index
 		@posts = Post.search(params[:search]).paginate(:page => params[:page], :per_page => 3)
@@ -46,7 +46,7 @@ class PostsController < ApplicationController
 		elsif comments_flag #if set, we're only adding a comment (nested attribute)
 			if @post.update_attributes(params[:post])
 				@comments = @post.comments.order('created_at DESC')
-				render :partial => "comments" #render only comments partial
+				respond_with @comments, :location => post_path(@post)
 			else
 				flash[:error] = "Error submitting comment. Try again or contact sysadmin"
 				redirect_to @post
