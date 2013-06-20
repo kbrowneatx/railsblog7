@@ -12,7 +12,7 @@
 	<h2>Comments</h2>
 
 	<h5><%= @user.name %>, comment on this post</h5>
-	<%= simple_form_for @post do |f| %>
+	<%= simple_form_for @post, :remote => true do |f| %>
 		<%= f.simple_fields_for :comments, @newcomment do |nc| %>
 		<p>
 			<%= nc.input :content, :as => :text, :label => false, :input_html => { :class => "span6", :rows => 6} %>

@@ -8,12 +8,13 @@ class Ability
     if user.role == 'admin'
       can :manage, [User, Post, Comment]
     elsif user.role == 'author'
-	  can [:read, :create, :update], [User, Post, Comment]
-	  can [:destroy], Post
+			can [:read, :create, :update], [User, Post, Comment]
+			can [:destroy], Post
 	  # can :manage, Session
-	else
-      can :read, [Post, Comment]
-	  can :create, Comment
+		else
+			can :read, [Post, Comment]
+			can :update, Post
+			can :create, Comment
 	  # can :manage, Session
     end
     #
